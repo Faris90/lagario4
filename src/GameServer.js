@@ -119,7 +119,7 @@ GameServer.prototype.start = function() {
     console.log("[Game] Current game mode is "+this.gameMode.name);
     
     // Player bots (Experimental)
-   
+    this.config.serverBots = 0;
     if (this.config.serverBots > 0) {
         var BotLoader = require('./ai/BotLoader.js');
         this.bots = new BotLoader(this,this.config.serverBots);
@@ -311,11 +311,8 @@ GameServer.prototype.updateFood = function() {
 }
 
 GameServer.prototype.spawnFood = function() {
-        if (Math.floor(Math.random() * 10000) + 1  != 10000) {
- var f = new Entity.Food(this.getNextNodeId(), null, this.getRandomPosition(),Math.floor(Math.random() * 20) + this.config.foodMass);
-	f.setColor(this.getRandomColor());
-	
-		
+    var f = new Entity.Food(this.getNextNodeId(), null, this.getRandomPosition(), Math.floor(Math.random() * 20) + this.config.foodMass);
+    f.setColor(this.getRandomColor());
 	
     this.addNode(f);
     this.currentFood++; 
