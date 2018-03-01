@@ -13,7 +13,7 @@ PlayerCell.prototype = new Cell();
 
 PlayerCell.prototype.visibleCheck = function(box,centerPos) {
     // Use old fashioned checking method if cell is small
-	if (this.mass < 150 || this.mass != 100) {
+	if (this.mass < 150) {
 	    return this.collisionCheck(box.bottomY,box.topY,box.rightX,box.leftX);
 	}
 	
