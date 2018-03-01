@@ -3,7 +3,7 @@ var Cell = require('./Cell');
 
 function Virus() {
     Cell.apply(this, Array.prototype.slice.call(arguments));
-	 this.name = "virus sheild"
+	 this.name = "HERO"
     this.cellType = 2;
 }
 
