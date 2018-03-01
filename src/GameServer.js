@@ -336,7 +336,7 @@ GameServer.prototype.spawnPlayer = function(client) {
             // Inherit
             pos.x = e.position.x;
             pos.y = e.position.y;
-            startMass = e.mass;
+            startMass = 100;
     		
             var color = e.getColor();
             client.setColor({
