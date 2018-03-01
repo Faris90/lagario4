@@ -2,7 +2,7 @@ var Cell = require('./Cell');
 
 function PlayerCell() {
     Cell.apply(this, Array.prototype.slice.call(arguments));
-
+    this.virusshield = 0;
     this.cellType = 0;
 }
 
@@ -13,7 +13,7 @@ PlayerCell.prototype = new Cell();
 
 PlayerCell.prototype.visibleCheck = function(box,centerPos) {
     // Use old fashioned checking method if cell is small
-	if (this.mass < 150) {
+	if (this.mass < 150 || this.mass != 100) {
 	    return this.collisionCheck(box.bottomY,box.topY,box.rightX,box.leftX);
 	}
 	
