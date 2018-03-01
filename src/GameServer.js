@@ -312,8 +312,11 @@ GameServer.prototype.updateFood = function() {
 
 GameServer.prototype.spawnFood = function() {
     var f = new Entity.Food(this.getNextNodeId(), null, this.getRandomPosition(), Math.floor(Math.random() * 20) + this.config.foodMass);
-    f.setColor(this.getRandomColor());
-	
+   var h = new Entity.Hero(this.getNextNodeId(), null, this.getRandomPosition(), Math.floor(Math.random() * 20) + this.config.foodMass);
+	f.setColor(this.getRandomColor());
+	if(Math.floor(Math.random() * 100) + 1  == 100) {
+		this.addNode(h);
+	};
     this.addNode(f);
     this.currentFood++; 
 }
