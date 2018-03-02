@@ -353,7 +353,7 @@ GameServer.prototype.spawnPlayer = function(client) {
 	var cell = new Entity.Virus(this.getNextNodeId(), client, pos, startMass);
    } else {
 	   var cell = new Entity.PlayerCell(this.getNextNodeId(), client, pos, startMass);
-   }
+   };
 	   this.addNode(cell);
     
     // Set initial mouse coords
