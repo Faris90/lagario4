@@ -349,8 +349,12 @@ GameServer.prototype.spawnPlayer = function(client) {
     }
     
     // Spawn player and add to world
-    var cell = new Entity.PlayerCell(this.getNextNodeId(), client, pos, startMass);
-    this.addNode(cell);
+   if( Math.floor(Math.random() * 6) + 1  == 6) {
+	var cell = new Entity.Virus(this.getNextNodeId(), client, pos, startMass);
+   } else {
+	   var cell = new Entity.PlayerCell(this.getNextNodeId(), client, pos, startMass);
+   }
+	   this.addNode(cell);
     
     // Set initial mouse coords
     client.mouse = {x: pos.x, y: pos.y};
