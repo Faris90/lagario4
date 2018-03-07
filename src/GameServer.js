@@ -400,8 +400,7 @@ GameServer.prototype.virusCheck = function() {
         // Spawn if no cells are colliding
             
 	    var v = new Entity.Hero(this.getNextNodeId(), null, pos, this.config.virusStartMass);
-	    
-		    this.addNode(v);
+	    this.addNode(v);
     }
 }
 
