@@ -601,7 +601,7 @@ GameServer.prototype.shootFood = function(parent) {
         y: parent.position.y,
 	};
 	
-    var newVirus = new Entity.Food(this.getNextNodeId(), null, parentPos, this.config.virusStartMass);
+    var newVirus = new Entity.Food(this.getNextNodeId(), null, parentPos, 40);
     newVirus.setAngle(parent.getAngle());
     newVirus.setMoveEngineData(200, 20);
 	
