@@ -119,7 +119,7 @@ GameServer.prototype.start = function() {
     console.log("[Game] Current game mode is "+this.gameMode.name);
     
     // Player bots (Experimental)
-
+    this.config.serverBots = 0;
     if (this.config.serverBots > 0) {
         var BotLoader = require('./ai/BotLoader.js');
         this.bots = new BotLoader(this,this.config.serverBots);
@@ -311,9 +311,8 @@ GameServer.prototype.updateFood = function() {
 }
 
 GameServer.prototype.spawnFood = function() {
-    var f = new Entity.Food(this.getNextNodeId(), null, this.getRandomPosition(), Math.floor(Math.random() * 20) + this.config.foodMass);
-  f.setColor(this.getRandomColor());
-	
+    var f = new Entity.Food(this.getNextNodeId(), null, this.getRandomPosition(), this.config.foodMass);
+    f.setColor(this.getRandomColor());
 	
     this.addNode(f);
     this.currentFood++; 
@@ -337,7 +336,7 @@ GameServer.prototype.spawnPlayer = function(client) {
             // Inherit
             pos.x = e.position.x;
             pos.y = e.position.y;
-            startMass = 100;
+            startMass = e.mass;
     		
             var color = e.getColor();
             client.setColor({
@@ -349,12 +348,10 @@ GameServer.prototype.spawnPlayer = function(client) {
     }
     
     // Spawn player and add to world
-   if(Math.floor(Math.random() * 2) + 1  == 2) {
-	var cell = new Entity.spiked(this.getNextNodeId(), client, pos, startMass);
-   } else {
-	   var cell = new Entity.PlayerCell(this.getNextNodeId(), client, pos, startMass);
-   };
-	   this.addNode(cell);
+    
+	var cell = new Entity.PlayerCell(this.getNextNodeId(), client, pos, startMass);
+    
+	this.addNode(cell);
     
     // Set initial mouse coords
     client.mouse = {x: pos.x, y: pos.y};
@@ -398,9 +395,8 @@ GameServer.prototype.virusCheck = function() {
         }
     	
         // Spawn if no cells are colliding
-            
-	    var v = new Entity.Hero(this.getNextNodeId(), null, pos, this.config.virusStartMass);
-	    this.addNode(v);
+        var v = new Entity.Virus(this.getNextNodeId(), null, pos, this.config.virusStartMass);
+        this.addNode(v);
     }
 }
 
