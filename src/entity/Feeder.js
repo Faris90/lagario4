@@ -2,7 +2,11 @@ var Cell = require('./Cell');
 
 function Virus() {
     Cell.apply(this, Array.prototype.slice.call(arguments));
-	
+	this.color = {
+        r: 212,
+        g: 36,
+        b: 38
+    };
     this.cellType = 2;
 }
 
