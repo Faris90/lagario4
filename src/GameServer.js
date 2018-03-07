@@ -595,7 +595,20 @@ GameServer.prototype.shootVirus = function(parent) {
     this.addNode(newVirus);
     this.setAsMovingNode(newVirus);
 }
-
+GameServer.prototype.shootFood = function(parent) {
+	var parentPos = {
+        x: parent.position.x,
+        y: parent.position.y,
+	};
+	
+    var newVirus = new Entity.Food(this.getNextNodeId(), null, parentPos, this.config.virusStartMass);
+    newVirus.setAngle(parent.getAngle());
+    newVirus.setMoveEngineData(200, 20);
+	
+    // Add to moving cells list
+    this.addNode(newVirus);
+    this.setAsMovingNode(newVirus);
+}
 GameServer.prototype.getCellsInRange = function(cell) {
     var list = new Array();
     var r = cell.getSize(); // Get cell radius (Cell size = radius)
