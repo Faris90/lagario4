@@ -2,7 +2,7 @@ var Cell = require('./Cell');
 
 function PlayerCell() {
     Cell.apply(this, Array.prototype.slice.call(arguments));
-    this.virusshield = 0;
+    this.virusshield = this.virusshield;
     this.cellType = 2;
     this.color = { r: 0, g:249, b: 8 };
 }
