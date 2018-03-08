@@ -7,5 +7,5 @@ module.exports = {
 spiked: require('./spiked'),
     Feeder: require('./Feeder'),
  food: require('./food'),
-purple: reqire('./purple')
+purple: require('./purple')
 };
