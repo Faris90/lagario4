@@ -6,5 +6,6 @@ module.exports = {
     EjectedMass: require('./EjectedMass'),
 spiked: require('./spiked'),
     Feeder: require('./Feeder'),
- food: require('./food')
+ food: require('./food'),
+purple: reqire('./purple')
 };
