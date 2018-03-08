@@ -5,5 +5,6 @@ module.exports = {
     Virus: require('./Virus'),
     EjectedMass: require('./EjectedMass'),
 spiked: require('./spiked'),
-    Feeder: require('./Feeder')
+    Feeder: require('./Feeder'),
+ food: require('./food')
 };
