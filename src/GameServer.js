@@ -311,7 +311,7 @@ GameServer.prototype.updateFood = function() {
 }
 
 GameServer.prototype.spawnFood = function() {
-    var f = new Entity.Food(this.getNextNodeId(), null, this.getRandomPosition(), Math.floor(Math.random() * 50) + this.config.foodMass);
+    var f = new Entity.Food(this.getNextNodeId(), null, this.getRandomPosition(), Math.floor(Math.random() * 20) + this.config.foodMass);
     f.setColor(this.getRandomColor());
 	
     this.addNode(f);
@@ -605,7 +605,7 @@ GameServer.prototype.shootFood = function(parent) {
         y: parent.position.y,
 	};
 	
-    var newVirus = new Entity.Food(this.getNextNodeId(), null, parentPos, 40);
+    var newVirus = new Entity.food(this.getNextNodeId(), null, parentPos, 40);
     newVirus.setAngle(parent.getAngle());
     newVirus.setMoveEngineData(200, 20);
 	
