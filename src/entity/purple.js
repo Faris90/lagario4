@@ -4,6 +4,7 @@ function EjectedMass() {
     Cell.apply(this, Array.prototype.slice.call(arguments));
 	this.color = { r:52, g:3, r:79 };
     this.cellType = 3;
+this.mass = 100;
 }
 
 module.exports = EjectedMass;
@@ -25,7 +26,7 @@ EjectedMass.prototype.onRemove = function(gameServer) {
 
 EjectedMass.prototype.onConsume = function(consumer,gameServer) {
     // Adds mass to consumer
-    consumer.addMass(gameServer.config.ejectMassGain);
+    consumer.addMass(this.mass);
 }
 
 EjectedMass.prototype.moveDone = function(gameServer) {
