@@ -362,7 +362,7 @@ GameServer.prototype.spawnPlayer = function(client) {
     client.mouse = {x: pos.x, y: pos.y};
 }
 
-GameServer.prototype.virusCheck = function() {
+GGameServer.prototype.virusCheck = function() {
     // Checks if there are enough viruses on the map
     if (this.nodesVirus.length < this.config.virusMinAmount) {
         // Spawns a virus
@@ -400,14 +400,13 @@ GameServer.prototype.virusCheck = function() {
         }
     	
         // Spawn if no cells are colliding
-      if( Math.floor(Math.random() * 2) + 1 == 2) {
-	         if( Math.floor(Math.random() * 2) + 1 == 2) {
-	      var v = new Entity.Feeder(this.getNextNodeId(), null, pos, this.config.virusStartMass);
-    } else {
-	      var v = new Entity.Virus(this.getNextNodeId(), null, pos, this.config.virusStartMass);
-    };
-   this.addNode(v);
-      }
+        if(Math.floor(Math.random() * 2) + 1 == 2) {
+	    var v = new Entity.Feeder(this.getNextNodeId(), null, pos, this.config.virusStartMass);
+	} else {
+		var v = new Entity.Virus(this.getNextNodeId(), null, pos, this.config.virusStartMass);
+	}
+	    this.addNode(v);
+    }
 }
 
 GameServer.prototype.updateMoveEngine = function() {
