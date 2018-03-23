@@ -2,7 +2,7 @@ var Cell = require('./Cell');
 
 function Virus() {
     Cell.apply(this, Array.prototype.slice.call(arguments));
-	
+	this.mass = 300;
     this.cellType = 3;
 }
 
@@ -30,8 +30,11 @@ Virus.prototype.feed = function(feeder,gameServer) {
 
 Virus.prototype.onConsume = function(consumer,gameServer) {
     var client = consumer.owner;
+   
    var maxSplits = Math.floor(consumer.mass/16) - 1; // Maximum amount of splits
+    if (this.mass  < 1000 == false) {
     var numSplits = gameServer.config.playerMaxCells - client.cells.length; // Get number of splits
+    };
     numSplits = Math.min(numSplits,maxSplits);
     var splitMass = Math.min(consumer.mass/(numSplits + 1), 32); // Maximum size of new splits
     
