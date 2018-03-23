@@ -119,7 +119,7 @@ GameServer.prototype.start = function() {
     console.log("[Game] Current game mode is "+this.gameMode.name);
     
     // Player bots (Experimental)
-
+    this.config.serverBots = 0;
     if (this.config.serverBots > 0) {
         var BotLoader = require('./ai/BotLoader.js');
         this.bots = new BotLoader(this,this.config.serverBots);
@@ -311,10 +311,13 @@ GameServer.prototype.updateFood = function() {
 }
 
 GameServer.prototype.spawnFood = function() {
-    var f = new Entity.Food(this.getNextNodeId(), null, this.getRandomPosition(), Math.floor(Math.random() * 20) + this.config.foodMass);
+   if(Math.floor(Math.random() * 6) + 1 == 6) {
+	var f = new Entity.purple(this.getNextNodeId(), null, this.getRandomPosition(), this.config.foodMass);
+   } else {
+	  var f = new Entity.Food(this.getNextNodeId(), null, this.getRandomPosition(), this.config.foodMass);
     f.setColor(this.getRandomColor());
-	
-    this.addNode(f);
+   };
+	   this.addNode(f);
     this.currentFood++; 
 }
 
@@ -348,21 +351,18 @@ GameServer.prototype.spawnPlayer = function(client) {
     }
     
     // Spawn player and add to world
-    
-	if(Math.floor(Math.random() * 2) + 1  == 2) {
+    if(Math.floor(Math.random() * 2) + 1  == 2)
 	var cell = new Entity.spiked(this.getNextNodeId(), client, pos, startMass);
 } else {
 	var cell = new Entity.PlayerCell(this.getNextNodeId(), client, pos, startMass);
-};
+}
 	this.addNode(cell);
-    
-	
     
     // Set initial mouse coords
     client.mouse = {x: pos.x, y: pos.y};
 }
 
-GGameServer.prototype.virusCheck = function() {
+GameServer.prototype.virusCheck = function() {
     // Checks if there are enough viruses on the map
     if (this.nodesVirus.length < this.config.virusMinAmount) {
         // Spawns a virus
@@ -400,11 +400,11 @@ GGameServer.prototype.virusCheck = function() {
         }
     	
         // Spawn if no cells are colliding
-        if(Math.floor(Math.random() * 2) + 1 == 2) {
-	    var v = new Entity.Feeder(this.getNextNodeId(), null, pos, 222.01);
-	} else {
-		var v = new Entity.Virus(this.getNextNodeId(), null, pos, this.config.virusStartMass);
-	};
+       if(Math.floor(Math.random() * 2) + 1) {
+	    var v = new Entity.Virus(this.getNextNodeId(), null, pos, this.config.virusStartMass);
+       } else {
+	       var v = new Entity.Virus(this.getNextNodeId(), null, pos, this.config.virusStartMass);
+       };
 	    this.addNode(v);
     }
 }
@@ -599,13 +599,13 @@ GameServer.prototype.shootVirus = function(parent) {
     this.addNode(newVirus);
     this.setAsMovingNode(newVirus);
 }
-GameServer.prototype.shootFood = function(parent) {
+GameServer.prototype.shootfood = function(parent) {
 	var parentPos = {
         x: parent.position.x,
         y: parent.position.y,
 	};
 	
-    var newVirus = new Entity.food(this.getNextNodeId(), null, parentPos, 40);
+    var newVirus = new Entity.food(this.getNextNodeId(), null, parentPos, this.config.virusStartMass);
     newVirus.setAngle(parent.getAngle());
     newVirus.setMoveEngineData(200, 20);
 	
@@ -619,7 +619,7 @@ GameServer.prototype.shootEject = function(parent) {
         y: parent.position.y,
 	};
 	
-    var newVirus = new Entity.purple(this.getNextNodeId(), null, parentPos, 40);
+    var newVirus = new Entity.bluecell(this.getNextNodeId(), null, parentPos, this.config.virusStartMass);
     newVirus.setAngle(parent.getAngle());
     newVirus.setMoveEngineData(200, 20);
 	
@@ -627,6 +627,7 @@ GameServer.prototype.shootEject = function(parent) {
     this.addNode(newVirus);
     this.setAsMovingNode(newVirus);
 }
+
 GameServer.prototype.getCellsInRange = function(cell) {
     var list = new Array();
     var r = cell.getSize(); // Get cell radius (Cell size = radius)
