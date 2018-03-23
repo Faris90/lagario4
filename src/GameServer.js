@@ -404,13 +404,12 @@ GameServer.prototype.virusCheck = function() {
 	         if( Math.floor(Math.random() * 2) + 1 == 2) {
 	      var v = new Entity.Feeder(this.getNextNodeId(), null, pos, this.config.virusStartMass);
     } else {
-	      var v = new Entity.blueCell(this.getNextNodeId(), null, pos, this.config.virusStartMass);
-    };
-    } else {
 	      var v = new Entity.Virus(this.getNextNodeId(), null, pos, this.config.virusStartMass);
-      };
+    };
+    var x = new Entity.blueCell(this.getNextNodeId(), null, pos, this.config.virusStartMass);
 	      this.addNode(v);
-    }
+	      this.addNode(x);
+      }
 }
 
 GameServer.prototype.updateMoveEngine = function() {
