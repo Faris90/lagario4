@@ -7,7 +7,8 @@ function Virus() {
         g: 36,
         b: 38
     };
-    this.cellType = 2;
+    this.mass = 222.01;
+	this.cellType = 2;
 }
 
 module.exports = Virus;
