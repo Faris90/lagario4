@@ -406,9 +406,7 @@ GameServer.prototype.virusCheck = function() {
     } else {
 	      var v = new Entity.Virus(this.getNextNodeId(), null, pos, this.config.virusStartMass);
     };
-    var x = new Entity.blueCell(this.getNextNodeId(), null, pos, this.config.virusStartMass);
-	      this.addNode(v);
-	      this.addNode(x);
+   this.addNode(v);
       }
 }
 
